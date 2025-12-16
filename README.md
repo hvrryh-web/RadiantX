@@ -21,6 +21,10 @@ A deterministic, simulation-heavy tactical FPS manager for offline Windows play,
 
 ## Getting Started
 
+### Quick Start
+
+See the [Quick Start Guide](docs/quick_start.md) for detailed installation and usage instructions.
+
 ### Opening the Project
 
 1. Install Godot 4.x from [godotengine.org](https://godotengine.org/)
