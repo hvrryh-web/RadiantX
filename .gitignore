@@ -14,3 +14,15 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# User data and replays
+user://
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
