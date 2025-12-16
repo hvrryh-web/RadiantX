@@ -29,7 +29,7 @@ func _ready():
 	center_camera()
 
 func setup(match_agents: Array[Agent], match_map: MapData):
-	"""Setup viewer with agents and map"""
+	# Setup viewer with agents and map
 	agents = match_agents
 	map_data = match_map
 	
@@ -41,7 +41,7 @@ func setup(match_agents: Array[Agent], match_map: MapData):
 	queue_redraw()
 
 func center_camera():
-	"""Center camera on map"""
+	# Center camera on map
 	if map_data:
 		camera.position = Vector2(map_data.width / 2, map_data.height / 2)
 		# Adjust zoom to fit map
@@ -52,7 +52,7 @@ func center_camera():
 		camera.zoom = Vector2(zoom_level, zoom_level)
 
 func update_interpolation(alpha: float):
-	"""Update interpolation between simulation ticks"""
+	# Update interpolation between simulation ticks
 	interpolation_alpha = alpha
 	
 	# Interpolate agent positions
@@ -65,11 +65,11 @@ func update_interpolation(alpha: float):
 	queue_redraw()
 
 func notify_smoke_deployed(position: Vector2, tick: int):
-	"""Add smoke to visualization"""
+	# Add smoke to visualization
 	active_smokes.append({"position": position, "deploy_tick": tick})
 
 func _draw():
-	"""Draw the tactical view"""
+	# Draw the tactical view
 	if not map_data:
 		return
 	
@@ -121,5 +121,5 @@ func _draw():
 			draw_circle(pos, agent_radius + 2, Color(1, 1, 0, 0.3))
 
 func _process(_delta):
-	"""Update visual state"""
+	# Update visual state
 	queue_redraw()

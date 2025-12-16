@@ -112,8 +112,7 @@ func _lines_intersect(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2) -> boo
 
 func _point_in_rect(point: Vector2, rect: Dictionary) -> bool:
 	"""Check if point is inside rectangle"""
-	return point.x >= rect.x and point.x <= rect.x + rect.width and \
-		   point.y >= rect.y and point.y <= rect.y + rect.height
+	return point.x >= rect.x and point.x <= rect.x + rect.width and point.y >= rect.y and point.y <= rect.y + rect.height
 
 func get_zone_by_id(zone_id: String) -> Dictionary:
 	"""Get zone by ID"""

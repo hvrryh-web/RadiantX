@@ -26,47 +26,47 @@ func _ready():
 	pass
 
 func setup(engine: MatchEngine):
-	"""Setup controller with match engine"""
+	# Setup controller with match engine
 	match_engine = engine
 
 func play():
-	"""Start playback"""
+	# Start playback
 	is_playing = true
 	playback_state_changed.emit(true)
 
 func pause():
-	"""Pause playback"""
+	# Pause playback
 	is_playing = false
 	playback_state_changed.emit(false)
 
 func toggle_play_pause():
-	"""Toggle between play and pause"""
+	# Toggle between play and pause
 	if is_playing:
 		pause()
 	else:
 		play()
 
 func set_speed(speed: float):
-	"""Set playback speed (0.25x, 0.5x, 1x, 2x, 4x)"""
+	# Set playback speed (0.25x, 0.5x, 1x, 2x, 4x)
 	playback_speed = clamp(speed, 0.25, 4.0)
 	speed_changed.emit(playback_speed)
 
 func increase_speed():
-	"""Increase playback speed"""
+	# Increase playback speed
 	var speeds = [0.25, 0.5, 1.0, 2.0, 4.0]
 	var current_index = speeds.find(playback_speed)
 	if current_index < speeds.size() - 1:
 		set_speed(speeds[current_index + 1])
 
 func decrease_speed():
-	"""Decrease playback speed"""
+	# Decrease playback speed
 	var speeds = [0.25, 0.5, 1.0, 2.0, 4.0]
 	var current_index = speeds.find(playback_speed)
 	if current_index > 0:
 		set_speed(speeds[current_index - 1])
 
 func scrub_to_tick(tick: int):
-	"""Scrub to a specific tick in replay"""
+	# Scrub to a specific tick in replay
 	if current_mode != PlaybackMode.REPLAY:
 		return
 	
@@ -74,15 +74,15 @@ func scrub_to_tick(tick: int):
 	tick_changed.emit(replay_tick)
 
 func scrub_forward(ticks: int = 20):
-	"""Scrub forward by number of ticks"""
+	# Scrub forward by number of ticks
 	scrub_to_tick(replay_tick + ticks)
 
 func scrub_backward(ticks: int = 20):
-	"""Scrub backward by number of ticks"""
+	# Scrub backward by number of ticks
 	scrub_to_tick(replay_tick - ticks)
 
 func load_replay(event_log: EventLog) -> bool:
-	"""Load replay from event log"""
+	# Load replay from event log
 	replay_events = event_log.get_events()
 	if replay_events.is_empty():
 		return false
@@ -95,7 +95,7 @@ func load_replay(event_log: EventLog) -> bool:
 	return true
 
 func _process(delta):
-	"""Process playback"""
+	# Process playback
 	if not is_playing or not match_engine:
 		return
 	
@@ -106,7 +106,7 @@ func _process(delta):
 			_process_replay(delta)
 
 func _process_live(delta):
-	"""Process live match playback"""
+	# Process live match playback
 	tick_accumulator += delta * playback_speed
 	
 	var tick_delta = MatchEngine.TICK_DELTA
@@ -115,7 +115,7 @@ func _process_live(delta):
 		tick_accumulator -= tick_delta
 
 func _process_replay(delta):
-	"""Process replay playback"""
+	# Process replay playback
 	if replay_tick >= max_replay_tick:
 		pause()
 		return
@@ -133,13 +133,13 @@ func _process_replay(delta):
 			break
 
 func get_current_tick() -> int:
-	"""Get current tick"""
+	# Get current tick
 	if current_mode == PlaybackMode.REPLAY:
 		return replay_tick
 	return match_engine.current_tick if match_engine else 0
 
 func get_playback_progress() -> float:
-	"""Get playback progress as ratio (0.0 to 1.0)"""
+	# Get playback progress as ratio (0.0 to 1.0)
 	if current_mode == PlaybackMode.REPLAY and max_replay_tick > 0:
 		return float(replay_tick) / float(max_replay_tick)
 	return 0.0

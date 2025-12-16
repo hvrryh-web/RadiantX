@@ -9,7 +9,7 @@ func _ready():
 	run_tests()
 
 func run_tests():
-	"""Run all determinism tests"""
+	# Run all determinism tests
 	test_same_seed_same_results()
 	test_different_seed_different_results()
 	test_replay_consistency()
@@ -33,7 +33,7 @@ func run_tests():
 		print("\n✗ Some tests failed")
 
 func test_same_seed_same_results():
-	"""Test that same seed produces same results"""
+	# Test that same seed produces same results
 	print("\nTest: Same seed produces same results")
 	
 	var seed = 12345
@@ -50,7 +50,7 @@ func test_same_seed_same_results():
 		print("    Events 1: %d, Events 2: %d" % [events1.size(), events2.size()])
 
 func test_different_seed_different_results():
-	"""Test that different seeds produce different results"""
+	# Test that different seeds produce different results
 	print("\nTest: Different seeds produce different results")
 	
 	var events1 = run_match_simulation(12345, 100)
@@ -65,7 +65,7 @@ func test_different_seed_different_results():
 		print("  ✗ Event logs are identical (should differ)")
 
 func test_replay_consistency():
-	"""Test that replays can be loaded and match original"""
+	# Test that replays can be loaded and match original
 	print("\nTest: Replay consistency")
 	
 	var seed = 99999
@@ -101,7 +101,7 @@ func test_replay_consistency():
 		print("  ✗ Replay differs from original")
 
 func run_match_simulation(seed: int, ticks: int) -> Array[Dictionary]:
-	"""Run a simplified match simulation and return events"""
+	# Run a simplified match simulation and return events
 	var rng = RandomNumberGenerator.new()
 	rng.seed = seed
 	
@@ -152,7 +152,7 @@ func run_match_simulation(seed: int, ticks: int) -> Array[Dictionary]:
 	return events
 
 func compare_event_logs(events1: Array[Dictionary], events2: Array[Dictionary]) -> bool:
-	"""Compare two event logs for equality"""
+	# Compare two event logs for equality
 	if events1.size() != events2.size():
 		return false
 	
@@ -185,7 +185,7 @@ func compare_event_logs(events1: Array[Dictionary], events2: Array[Dictionary]) 
 	return true
 
 func compare_dictionaries(d1: Dictionary, d2: Dictionary) -> bool:
-	"""Compare two dictionaries"""
+	# Compare two dictionaries
 	if d1.size() != d2.size():
 		return false
 	
