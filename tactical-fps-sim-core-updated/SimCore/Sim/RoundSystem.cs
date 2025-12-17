@@ -23,7 +23,7 @@ public static class RoundSystem
         }
         else if (lastRoundResult is not null)
         {
-            ApplyEconomy(match, ruleset, lastRoundResult.Value.Winner);
+            ApplyEconomy(match, ruleset, lastRoundResult.Winner);
         }
 
         // Reset per-round combat state (tactical FPS norm).

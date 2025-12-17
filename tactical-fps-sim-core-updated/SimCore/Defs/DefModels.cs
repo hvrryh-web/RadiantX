@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SimCore.Math;
 
 namespace SimCore.Defs;
 

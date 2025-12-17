@@ -79,7 +79,7 @@ public sealed class UtilitySystem
 
             float factor = 1f;
             if (e.Spec.Falloff > 0f)
-                factor = System.MathF.Clamp(1f - (d / e.Spec.Radius) * e.Spec.Falloff, 0f, 1f);
+                factor = System.Math.Clamp(1f - (d / e.Spec.Radius) * e.Spec.Falloff, 0f, 1f);
 
             // Apply once-per-agent for instantaneous/status effects
             bool firstForAgent = e.AppliedToEntities.Add(agent.EntityId);

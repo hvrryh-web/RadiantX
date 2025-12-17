@@ -36,11 +36,11 @@ public sealed class TtkDuelEngine : IDuelEngine
             while (hp > 0 && t < input.MaxTime)
             {
                 float sigma = HitModel.ComputeSigma(w, input.ShooterSpeed, input.ShooterCrouched, recoil, input.Shooter.Stress, input.Shooter.Traits);
-                float rWorld = baseRadius * System.MathF.Clamp(input.Exposure, 0f, 1f);
+                float rWorld = baseRadius * System.Math.Clamp(input.Exposure, 0f, 1f);
                 float rAng = System.MathF.Atan2(rWorld, System.MathF.Max(0.1f, input.Distance));
 
                 float pHit = 1f - System.MathF.Exp(-(rAng * rAng) / (2f * sigma * sigma));
-                pHit = System.MathF.Clamp(pHit, 0f, 1f);
+                pHit = System.Math.Clamp(pHit, 0f, 1f);
 
                 shots++;
 
@@ -73,7 +73,7 @@ public sealed class TtkDuelEngine : IDuelEngine
 
         if (killCount == 0)
         {
-            return new DuelResult(false, float.PositiveInfinity, shotsFired: 0, hits: 0, WinProbHint: 0f);
+            return new DuelResult(false, float.PositiveInfinity, ShotsFired: 0, Hits: 0, WinProbHint: 0f);
         }
 
         float meanTtk = tSum / killCount;
@@ -90,9 +90,9 @@ public sealed class TtkDuelEngine : IDuelEngine
     {
         // Higher aim, lower sigma, closer distance => more headshare.
         float aim = input.Shooter.Traits.Aim;
-        float distFactor = System.MathF.Clamp(1f - (input.Distance / 45f), 0.1f, 1f);
-        float sigmaFactor = System.MathF.Clamp(0.012f / System.MathF.Max(0.0005f, sigma), 0.4f, 1.2f);
+        float distFactor = System.Math.Clamp(1f - (input.Distance / 45f), 0.1f, 1f);
+        float sigmaFactor = System.Math.Clamp(0.012f / System.MathF.Max(0.0005f, sigma), 0.4f, 1.2f);
         float raw = 0.10f + 0.35f * aim * distFactor * sigmaFactor;
-        return System.MathF.Clamp(raw, 0.08f, 0.55f);
+        return System.Math.Clamp(raw, 0.08f, 0.55f);
     }
 }

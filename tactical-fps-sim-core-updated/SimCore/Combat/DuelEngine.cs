@@ -44,5 +44,5 @@ public sealed class AgentRuntime
         return baseRt + stressPenalty + extraPenalty;
     }
 
-    private static float Lerp(float a, float b, float t) => a + (b - a) * System.MathF.Clamp(t, 0f, 1f);
+    private static float Lerp(float a, float b, float t) => a + (b - a) * System.Math.Clamp(t, 0f, 1f);
 }

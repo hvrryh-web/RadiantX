@@ -26,3 +26,10 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.csproj.user

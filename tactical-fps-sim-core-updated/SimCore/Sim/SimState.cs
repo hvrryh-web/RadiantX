@@ -8,7 +8,6 @@ public sealed class AgentState
     public int EntityId { get; init; }
     public string AgentId { get; init; } = "";
     public TeamSide Side { get; init; } = TeamSide.Attack;
-    public int Credits;
 
     // Cached from AgentDef for buy-phase/autobuy convenience.
     public string[] LoadoutWeaponIds { get; init; } = Array.Empty<string>();
@@ -17,7 +16,6 @@ public sealed class AgentState
     public float MaxArmor;
 
     public Dictionary<string, UtilityState> Utilities { get; } = new();
-
 
     // Economy
     public int Credits;
