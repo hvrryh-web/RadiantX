@@ -11,16 +11,26 @@ var camera: Camera2D
 var agent_visual_positions: Dictionary = {}  # agent_id -> Vector2
 var interpolation_alpha: float = 0.0
 
-# Rendering settings
-var agent_radius: float = 3.0
-var team_a_color: Color = Color.BLUE
-var team_b_color: Color = Color.RED
-var occluder_color: Color = Color.DIM_GRAY
-var zone_color: Color = Color(1.0, 1.0, 1.0, 0.2)
-var smoke_color: Color = Color(0.7, 0.7, 0.7, 0.5)
+# Rendering settings - improved for accessibility
+var agent_radius: float = 6.0  # Doubled for visibility
+# Accessible color scheme - colorblind-friendly
+var team_a_color: Color = Color("#3B82F6")  # Blue-500
+var team_b_color: Color = Color("#F97316")  # Orange-500 (better than red for colorblind)
+var team_a_dark: Color = Color("#1E40AF")   # Darker blue for outlines
+var team_b_dark: Color = Color("#C2410C")   # Darker orange for outlines
+# Map elements with proper contrast
+var map_background: Color = Color("#0F172A")  # Slate-900
+var occluder_fill: Color = Color("#334155")   # Slate-700
+var occluder_border: Color = Color("#64748B") # Slate-500
+var zone_fill: Color = Color("#FDE047", 0.2)  # Yellow-300 at 20%
+var zone_border: Color = Color("#FACC15")     # Yellow-400
+var smoke_color: Color = Color("#94A3B8", 0.7) # Slate-400 at 70%
 
 # Smoke visualization
 var active_smokes: Array[Dictionary] = []  # {position, deploy_tick}
+
+# Dirty flag for optimized redraw
+var needs_redraw: bool = true
 
 func _ready():
 	camera = Camera2D.new()
@@ -62,11 +72,24 @@ func update_interpolation(alpha: float):
 			var target = agent.position
 			agent_visual_positions[agent.agent_id] = current_visual.lerp(target, 0.3)
 	
-	queue_redraw()
+	needs_redraw = true
+
+func mark_dirty():
+	needs_redraw = true
 
 func notify_smoke_deployed(position: Vector2, tick: int):
 	# Add smoke to visualization
 	active_smokes.append({"position": position, "deploy_tick": tick})
+	needs_redraw = true
+
+func _get_health_color(ratio: float) -> Color:
+	"""Get health bar color based on health ratio - colorblind accessible"""
+	if ratio > 0.6:
+		return Color("#22C55E")  # Green
+	elif ratio > 0.3:
+		return Color("#EAB308")  # Yellow/amber
+	else:
+		return Color("#EF4444")  # Red
 
 func _draw():
 	# Draw the tactical view
@@ -74,52 +97,76 @@ func _draw():
 		return
 	
 	# Draw map background
-	draw_rect(Rect2(0, 0, map_data.width, map_data.height), Color(0.1, 0.1, 0.1))
+	draw_rect(Rect2(0, 0, map_data.width, map_data.height), map_background)
 	
-	# Draw zones
+	# Draw zones with improved contrast
 	for zone in map_data.zones:
 		var rect = Rect2(zone.x, zone.y, zone.width, zone.height)
-		draw_rect(rect, zone_color, false, 1.0)
+		draw_rect(rect, zone_fill, true)
+		draw_rect(rect, zone_border, false, 1.5)
 	
-	# Draw occluders
+	# Draw occluders with improved colors
 	for occluder in map_data.occluders:
 		var rect = Rect2(occluder.x, occluder.y, occluder.width, occluder.height)
-		draw_rect(rect, occluder_color, true)
-		draw_rect(rect, Color.WHITE, false, 1.0)
+		draw_rect(rect, occluder_fill, true)
+		draw_rect(rect, occluder_border, false, 1.0)
 	
 	# Draw smoke
 	for smoke in active_smokes:
 		draw_circle(smoke.position, 5.0, smoke_color)
 	
-	# Draw agents
+	# Draw agents with improved visibility and colorblind accessibility
 	for agent in agents:
 		if not agent.is_alive():
 			continue
 		
 		var pos = agent_visual_positions.get(agent.agent_id, agent.position)
 		var color = team_a_color if agent.team == Agent.Team.TEAM_A else team_b_color
+		var dark_color = team_a_dark if agent.team == Agent.Team.TEAM_A else team_b_dark
 		
-		# Draw agent circle
+		# Draw agent circle with outline
 		draw_circle(pos, agent_radius, color)
+		draw_arc(pos, agent_radius, 0, TAU, 32, dark_color, 1.5)
+		
+		# Add team shape indicator (colorblind accessible)
+		if agent.team == Agent.Team.TEAM_A:
+			# Circle with inner dot for Team A
+			draw_circle(pos, agent_radius * 0.35, Color.WHITE)
+		else:
+			# Diamond shape overlay for Team B
+			var diamond = PackedVector2Array([
+				pos + Vector2(0, -agent_radius * 0.5),
+				pos + Vector2(agent_radius * 0.5, 0),
+				pos + Vector2(0, agent_radius * 0.5),
+				pos + Vector2(-agent_radius * 0.5, 0)
+			])
+			draw_colored_polygon(diamond, Color.WHITE)
 		
 		# Draw direction indicator
 		if agent.velocity.length() > 0.1:
 			var direction = agent.velocity.normalized()
-			var end_pos = pos + direction * (agent_radius + 3)
-			draw_line(pos, end_pos, color, 2.0)
+			var end_pos = pos + direction * (agent_radius + 4)
+			draw_line(pos, end_pos, Color.WHITE, 2.0)
 		
-		# Draw health bar
+		# Draw health bar with improved sizing and colors
 		var health_ratio = agent.health / agent.max_health
-		var bar_width = agent_radius * 2
-		var bar_height = 2.0
-		var bar_pos = pos + Vector2(-bar_width / 2, -agent_radius - 5)
-		draw_rect(Rect2(bar_pos, Vector2(bar_width, bar_height)), Color.RED)
-		draw_rect(Rect2(bar_pos, Vector2(bar_width * health_ratio, bar_height)), Color.GREEN)
+		var bar_width = agent_radius * 3
+		var bar_height = 4.0
+		var bar_pos = pos + Vector2(-bar_width / 2, -agent_radius - 8)
+		# Background bar
+		draw_rect(Rect2(bar_pos, Vector2(bar_width, bar_height)), Color("#1F2937"))
+		# Health fill with gradient color
+		var health_color = _get_health_color(health_ratio)
+		draw_rect(Rect2(bar_pos, Vector2(bar_width * health_ratio, bar_height)), health_color)
+		# Border
+		draw_rect(Rect2(bar_pos, Vector2(bar_width, bar_height)), Color("#6B7280"), false, 1.0)
 		
-		# Draw flash indicator
+		# Draw flash indicator (more visible)
 		if agent.is_flashed():
-			draw_circle(pos, agent_radius + 2, Color(1, 1, 0, 0.3))
+			draw_arc(pos, agent_radius + 3, 0, TAU, 32, Color.YELLOW, 2.0)
 
 func _process(_delta):
-	# Update visual state
-	queue_redraw()
+	# Update visual state only when needed
+	if needs_redraw:
+		queue_redraw()
+		needs_redraw = false
