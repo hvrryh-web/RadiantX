@@ -11,6 +11,7 @@ var vel: Vector2 = Vector2.ZERO
 var facing_rad: float = 0.0
 var stance: int = DataTypes.Stance.STAND
 var hp: float = 100.0
+var max_hp: float = 100.0  # Maximum HP for clamping heals
 var armor: float = 0.0
 var stress: float = 0.0  # Suppression
 var reaction_timer: float = 0.0
@@ -54,19 +55,17 @@ func take_damage(amount: float) -> float:
 	hp = maxf(0.0, hp - actual_damage)
 	return actual_damage
 
-var max_hp: float = 100.0  # Maximum HP for clamping heals
-
 func heal(amount: float, cap: float = -1.0):
 	## Heal the agent, clamped to max_hp
 	var max_val = cap if cap > 0 else max_hp
 	hp = minf(hp + amount, max_val)
 
 func add_stress(amount: float):
-	##Add stress/suppression##
+	## Add stress/suppression
 	stress = clampf(stress + amount, 0.0, 1.0)
 
 func update(delta: float):
-	##Update agent state for this frame##
+	## Update agent state for this frame
 	# Update reaction timer
 	if reaction_timer > 0:
 		reaction_timer = maxf(0.0, reaction_timer - delta)

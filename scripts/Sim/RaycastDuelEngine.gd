@@ -190,9 +190,8 @@ func _clone_agent_state(state: AgentState) -> AgentState:
 	return clone
 
 ## Check smoke occlusion along ray
+## Returns 0..1 opacity (0 = clear, 1 = fully blocked)
 func check_smoke_occlusion(from: Vector2, to: Vector2, smoke_volumes: Array) -> float:
-	##Calculate accumulated smoke density along a ray
-	Returns 0..1 opacity (0 = clear, 1 = fully blocked)##
 	var total_density = 0.0
 	var ray_length = from.distance_to(to)
 	

@@ -83,7 +83,7 @@ func create_duel_context(target_bridge: AgentBridge, map_data: MapData = null) -
 	
 	return context
 
-func apply_damage(amount: float, damage_type: int = DataTypes.DamageType.BULLET) -> float:
+func apply_damage(amount: float) -> float:
 	## Apply damage through the new system
 	if not agent_state:
 		if agent:

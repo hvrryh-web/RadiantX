@@ -227,12 +227,16 @@ func _draw_status_effects(agent: Agent, pos: Vector2):
 
 func _agent_has_status(agent: Agent, status_name: String) -> bool:
 	## Check if agent has a specific status effect
-	## This is a bridge function - extend as Agent.gd gains more status tracking
+	## Currently Agent.gd only tracks flash state
+	## Other statuses require AgentBridge integration (see AgentBridge.gd)
 	match status_name:
 		"flash":
 			return agent.is_flashed()
+		"concuss", "slow", "burn", "reveal", "suppress":
+			# These require AgentState integration via AgentBridge
+			# Return false until bridge is connected in MatchEngine
+			return false
 		_:
-			# Future: check agent.status_state if integrated
 			return false
 
 func _draw_dead_agent(agent: Agent):

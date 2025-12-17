@@ -141,9 +141,8 @@ func resolve_batch(contexts: Array, alive_attackers: int = 5, alive_defenders: i
 	return results
 
 ## Quick win probability check without full simulation
+## Returns: 1 if A wins, -1 if B wins, 0 if uncertain
 func quick_compare(context_a: DuelContext, context_b: DuelContext) -> int:
-	##Quick comparison of two duel contexts
-	Returns: 1 if A wins, -1 if B wins, 0 if uncertain##
 	var prob_a = ttk_engine.quick_win_probability(context_a)
 	var prob_b = ttk_engine.quick_win_probability(context_b)
 	
