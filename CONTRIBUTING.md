@@ -123,7 +123,18 @@ Update relevant docs:
 - `docs/map_format.md` - Map format changes
 - `docs/agents.md` - Agent behavior changes
 - `docs/replay.md` - Replay system changes
+- `docs/custom-agents.md` - Custom AI agent updates
 - `README.md` - User-facing changes
+
+## Custom AI Agents
+
+RadiantX includes three specialized custom agents for AI-assisted development:
+
+- **Agent 006** - Backend Architecture & Infrastructure
+- **Agent 007** - Game Development & GDScript
+- **Agent 47** - Frontend UI/UX & Accessibility
+
+These agents are automatically available during AI agent sessions (like GitHub Copilot coding agent). See [Custom AI Agents](docs/custom-agents.md) for details.
 
 ## License
 

@@ -90,6 +90,7 @@ Run determinism tests:
 - [Map Format Specification](docs/map_format.md)
 - [Agent Behavior](docs/agents.md)
 - [Replay System](docs/replay.md)
+- [Custom AI Agents](docs/custom-agents.md)
 
 ## License
 
