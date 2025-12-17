@@ -53,8 +53,7 @@ public sealed class RoundRunner
         var sim = new Simulator(_cfg, _db);
         var duelEngine = SelectEngine(sim, engineMode);
 
-        var rng = new DeterministicRng(_cfg.Seed);
-        rng.Mix(roundIndex * 1337 + 77);
+        var rng = new DeterministicRng(DeterministicRng.HashSeed(_cfg.Seed, roundIndex));
 
         var atkRuntime = ToRuntime(atk, atkDef);
         var defRuntime = ToRuntime(def, defDef);

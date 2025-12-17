@@ -1,5 +1,0 @@
-/home/runner/work/RadiantX/RadiantX/tactical-fps-sim-core-updated/SimCore/obj/Debug/net8.0/SimCore.GeneratedMSBuildEditorConfig.editorconfig
-/home/runner/work/RadiantX/RadiantX/tactical-fps-sim-core-updated/SimCore/obj/Debug/net8.0/SimCore.AssemblyInfoInputs.cache
-/home/runner/work/RadiantX/RadiantX/tactical-fps-sim-core-updated/SimCore/obj/Debug/net8.0/SimCore.AssemblyInfo.cs
-/home/runner/work/RadiantX/RadiantX/tactical-fps-sim-core-updated/SimCore/obj/Debug/net8.0/SimCore.csproj.CoreCompileInputs.cache
-/home/runner/work/RadiantX/RadiantX/tactical-fps-sim-core-updated/SimCore/obj/Debug/net8.0/SimCore.sourcelink.json

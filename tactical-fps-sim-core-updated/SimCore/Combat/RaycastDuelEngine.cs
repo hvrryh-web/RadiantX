@@ -60,7 +60,7 @@ public sealed class RaycastDuelEngine : IDuelEngine
             float firstWallT = Raycast2D.FirstHitT(_map.Walls, sx, sy, ex, ey);
 
             // Target hit test: treat target as circle at (tx,ty) with radius scaled by exposure.
-            float r = 0.30f * System.MathF.Clamp(input.Exposure, 0f, 1f);
+            float r = 0.30f * System.Math.Clamp(input.Exposure, 0f, 1f);
             bool hitTarget = IntersectCircle(sx, sy, ex, ey, tx, ty, r, out float tHit);
 
             if (hitTarget)
@@ -91,8 +91,8 @@ public sealed class RaycastDuelEngine : IDuelEngine
         // Similar headShare logic as TTK engine, but can incorporate exposure/stance.
         float headShare = 0.10f + 0.30f * input.Shooter.Traits.Aim;
         if (input.TargetCrouched) headShare *= 0.85f;
-        headShare *= System.MathF.Clamp(0.010f / System.MathF.Max(0.0005f, sigma), 0.5f, 1.1f);
-        headShare = System.MathF.Clamp(headShare, 0.08f, 0.50f);
+        headShare *= System.Math.Clamp(0.010f / System.MathF.Max(0.0005f, sigma), 0.5f, 1.1f);
+        headShare = System.Math.Clamp(headShare, 0.08f, 0.50f);
         return rng.NextFloat01() < headShare ? HitZone.Head : HitZone.Torso;
     }
 
