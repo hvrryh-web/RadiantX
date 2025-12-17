@@ -24,11 +24,12 @@ func simulate(context: DuelContext, num_iterations: int = 64) -> Dictionary:
 	return _summarize_results(results, context)
 
 func _simulate_single(context: DuelContext, iteration: int) -> DuelResult:
-	"""Simulate a single duel iteration"""
+	## Simulate a single duel iteration
 	var result = DuelResult.new()
 	
-	# Use iteration for sub-seed
-	rng.seed = rng.seed + iteration
+	# Advance RNG state naturally - don't modify seed during simulation
+	# Each iteration will get different values from the RNG stream
+	var _skip = rng.randi()  # Advance RNG for this iteration
 	
 	var target_hp = context.target_state.hp if context.target_state else 100.0
 	var time = context.compute_reaction_time()
@@ -163,6 +164,8 @@ func quick_win_probability(context: DuelContext) -> float:
 	var expected_ttk = context.compute_reaction_time() + expected_shots * shot_interval
 	
 	# Simple win probability based on whether we can kill before max time
+	# Scale factor of 2 accounts for variance in hit probability over multiple shots
+	const WIN_PROB_SCALE_FACTOR = 2.0
 	if expected_ttk < context.max_duel_time:
-		return minf(1.0, p_hit * 2)  # Rough approximation
+		return minf(1.0, p_hit * WIN_PROB_SCALE_FACTOR)
 	return 0.0
