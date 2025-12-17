@@ -34,10 +34,13 @@ var pending_flash: Vector2 = Vector2.ZERO
 var has_smoke_pending: bool = false
 var has_flash_pending: bool = false
 
-# Combat
-var last_shot_tick: int = -100
-const FIRE_RATE_TICKS: int = 4  # 5 shots per second at 20 TPS
-const SMOKE_DURATION: int = 300  # 15 seconds at 20 TPS
+# Combat constants
+const INITIAL_SHOT_TICK: int = -100  # Initial value ensuring first shot is always allowed
+const FIRE_RATE_TICKS: int = 4       # 5 shots per second at 20 TPS
+const SMOKE_DURATION: int = 300      # 15 seconds at 20 TPS
+
+# Combat state
+var last_shot_tick: int = INITIAL_SHOT_TICK
 
 # Movement
 var move_speed: float = 5.0
@@ -57,7 +60,7 @@ func reset():
 	smoke_positions.clear()
 	is_flashed_until = 0
 	velocity = Vector2.ZERO
-	last_shot_tick = -100
+	last_shot_tick = INITIAL_SHOT_TICK
 
 func update_beliefs(current_tick: int, all_agents: Array[Agent], map_data: MapData):
 	"""Update agent's beliefs about other agents (partial observability)"""
@@ -203,8 +206,13 @@ func check_flash_expired(current_tick: int):
 		is_flashed_until = 0
 
 func update_smokes(current_tick: int):
-	"""Update smoke positions, removing expired smokes"""
-	smoke_data = smoke_data.filter(func(s): return s.expire_tick > current_tick)
+	"""Update smoke positions, removing expired smokes (in-place for performance)"""
+	# Remove expired smokes using reverse iteration
+	for i in range(smoke_data.size() - 1, -1, -1):
+		if smoke_data[i].expire_tick <= current_tick:
+			smoke_data.remove_at(i)
+	
+	# Rebuild smoke_positions array
 	smoke_positions.clear()
 	for s in smoke_data:
 		smoke_positions.append(s.position)
@@ -277,7 +285,7 @@ func set_state(state: Dictionary):
 	health = state.health
 	current_state = state.state
 	is_flashed_until = state.get("is_flashed_until", 0)
-	last_shot_tick = state.get("last_shot_tick", -100)
+	last_shot_tick = state.get("last_shot_tick", INITIAL_SHOT_TICK)
 	
 	# Restore smoke data
 	smoke_data.clear()

@@ -12,19 +12,33 @@ var agent_visual_positions: Dictionary = {}  # agent_id -> Vector2
 var interpolation_alpha: float = 0.0
 
 # Rendering settings - improved for accessibility
-var agent_radius: float = 6.0  # Doubled for visibility
-# Accessible color scheme - colorblind-friendly
-var team_a_color: Color = Color("#3B82F6")  # Blue-500
-var team_b_color: Color = Color("#F97316")  # Orange-500 (better than red for colorblind)
-var team_a_dark: Color = Color("#1E40AF")   # Darker blue for outlines
-var team_b_dark: Color = Color("#C2410C")   # Darker orange for outlines
-# Map elements with proper contrast
-var map_background: Color = Color("#0F172A")  # Slate-900
-var occluder_fill: Color = Color("#334155")   # Slate-700
-var occluder_border: Color = Color("#64748B") # Slate-500
+const AGENT_RADIUS: float = 6.0  # Doubled from 3.0 for visibility
+var agent_radius: float = AGENT_RADIUS
+
+# Accessible color palette - colorblind-friendly
+const COLOR_TEAM_A: String = "#3B82F6"       # Blue-500
+const COLOR_TEAM_B: String = "#F97316"       # Orange-500 (better than red for colorblind)
+const COLOR_TEAM_A_DARK: String = "#1E40AF"  # Darker blue for outlines
+const COLOR_TEAM_B_DARK: String = "#C2410C"  # Darker orange for outlines
+const COLOR_MAP_BG: String = "#0F172A"       # Slate-900
+const COLOR_OCCLUDER_FILL: String = "#334155"  # Slate-700
+const COLOR_OCCLUDER_BORDER: String = "#64748B" # Slate-500
+const COLOR_ZONE_BORDER: String = "#FACC15"  # Yellow-400
+const COLOR_SMOKE: String = "#94A3B8"        # Slate-400
+const COLOR_HEALTH_HIGH: String = "#22C55E"  # Green
+const COLOR_HEALTH_MED: String = "#EAB308"   # Yellow
+const COLOR_HEALTH_LOW: String = "#EF4444"   # Red
+
+var team_a_color: Color = Color(COLOR_TEAM_A)
+var team_b_color: Color = Color(COLOR_TEAM_B)
+var team_a_dark: Color = Color(COLOR_TEAM_A_DARK)
+var team_b_dark: Color = Color(COLOR_TEAM_B_DARK)
+var map_background: Color = Color(COLOR_MAP_BG)
+var occluder_fill: Color = Color(COLOR_OCCLUDER_FILL)
+var occluder_border: Color = Color(COLOR_OCCLUDER_BORDER)
 var zone_fill: Color = Color("#FDE047", 0.2)  # Yellow-300 at 20%
-var zone_border: Color = Color("#FACC15")     # Yellow-400
-var smoke_color: Color = Color("#94A3B8", 0.7) # Slate-400 at 70%
+var zone_border: Color = Color(COLOR_ZONE_BORDER)
+var smoke_color: Color = Color(COLOR_SMOKE, 0.7)
 
 # Smoke visualization
 var active_smokes: Array[Dictionary] = []  # {position, deploy_tick}
@@ -85,11 +99,11 @@ func notify_smoke_deployed(position: Vector2, tick: int):
 func _get_health_color(ratio: float) -> Color:
 	"""Get health bar color based on health ratio - colorblind accessible"""
 	if ratio > 0.6:
-		return Color("#22C55E")  # Green
+		return Color(COLOR_HEALTH_HIGH)
 	elif ratio > 0.3:
-		return Color("#EAB308")  # Yellow/amber
+		return Color(COLOR_HEALTH_MED)
 	else:
-		return Color("#EF4444")  # Red
+		return Color(COLOR_HEALTH_LOW)
 
 func _draw():
 	# Draw the tactical view
