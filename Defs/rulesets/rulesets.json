@@ -1,0 +1,30 @@
+[
+  {
+    "id": "rules.cs",
+    "utilityFamily": "CS_Grenade",
+    "maxCarryWeight": 0,
+    "maxGrenades": 4,
+    "usesAbilityEconomy": false
+  },
+  {
+    "id": "rules.val",
+    "utilityFamily": "VAL_Ability",
+    "maxCarryWeight": 0,
+    "maxGrenades": 0,
+    "usesAbilityEconomy": true
+  },
+  {
+    "id": "rules.competitive",
+    "utilityFamily": "CS_Grenade",
+    "maxCarryWeight": 0,
+    "maxGrenades": 4,
+    "usesAbilityEconomy": false
+  },
+  {
+    "id": "rules.casual",
+    "utilityFamily": "CS_Grenade",
+    "maxCarryWeight": 0,
+    "maxGrenades": 6,
+    "usesAbilityEconomy": false
+  }
+]
