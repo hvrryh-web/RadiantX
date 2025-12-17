@@ -1,0 +1,14 @@
+{
+  "id": "rules.val",
+  "utilityFamily": "VAL_Ability",
+  "usesAbilityEconomy": true,
+  "roundStartCredits": 800,
+  "maxCredits": 9000,
+  "roundWinCredits": 3000,
+  "roundLossCredits": 1900,
+  "killCredits": 200,
+  "resetHpEachRound": true,
+  "resetArmorEachRound": true,
+  "refillSignatureEachRound": true,
+  "defaultSignatureRoundStartCharges": 1
+}

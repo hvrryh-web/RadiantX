@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimCore", "SimCore\SimCore.csproj", "{7A2C9C9B-7E20-4E6F-9E6E-8F3B8F64C3A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleRunner", "ConsoleRunner\ConsoleRunner.csproj", "{0B4B57A0-3F34-4B5D-A1B8-0D9C5B4E2A14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A2C9C9B-7E20-4E6F-9E6E-8F3B8F64C3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2C9C9B-7E20-4E6F-9E6E-8F3B8F64C3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2C9C9B-7E20-4E6F-9E6E-8F3B8F64C3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2C9C9B-7E20-4E6F-9E6E-8F3B8F64C3A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B4B57A0-3F34-4B5D-A1B8-0D9C5B4E2A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4B57A0-3F34-4B5D-A1B8-0D9C5B4E2A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4B57A0-3F34-4B5D-A1B8-0D9C5B4E2A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4B57A0-3F34-4B5D-A1B8-0D9C5B4E2A14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

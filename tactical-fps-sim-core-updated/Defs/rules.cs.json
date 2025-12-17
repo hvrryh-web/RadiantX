@@ -1,0 +1,21 @@
+{
+  "id": "rules.cs",
+  "utilityFamily": "CS_Grenade",
+  "maxGrenades": 4,
+  "usesAbilityEconomy": false,
+  "roundStartCredits": 800,
+  "maxCredits": 16000,
+  "roundWinCredits": 3250,
+  "roundLossCredits": 2000,
+  "killCredits": 300,
+  "resetHpEachRound": true,
+  "resetArmorEachRound": true,
+  "lossStreakBonuses": [
+    0,
+    500,
+    500,
+    500
+  ],
+  "refillSignatureEachRound": true,
+  "defaultSignatureRoundStartCharges": 1
+}

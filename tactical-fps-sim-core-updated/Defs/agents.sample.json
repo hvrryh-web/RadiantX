@@ -1,0 +1,56 @@
+[
+  {
+    "id": "agent.sample.entry",
+    "displayName": "Entry Fragger (Sample)",
+    "baseHp": 100,
+    "baseArmor": 50,
+    "traits": {
+      "aim": 0.72,
+      "recoilControl": 0.68,
+      "reaction": 0.75,
+      "movement": 0.78,
+      "gameSense": 0.55,
+      "composure": 0.52,
+      "teamwork": 0.6,
+      "utility": 0.4,
+      "discipline": 0.5,
+      "aggression": 0.75
+    },
+    "loadoutWeaponIds": [
+      "weapon.rifle.ak_like",
+      "weapon.pistol.default"
+    ],
+    "loadoutUtilityIds": [
+      "util.cs.flash",
+      "util.cs.smoke",
+      "util.cs.he"
+    ]
+  },
+  {
+    "id": "agent.sample.anchor",
+    "displayName": "Anchor (Sample)",
+    "baseHp": 100,
+    "baseArmor": 50,
+    "traits": {
+      "aim": 0.62,
+      "recoilControl": 0.65,
+      "reaction": 0.62,
+      "movement": 0.55,
+      "gameSense": 0.78,
+      "composure": 0.7,
+      "teamwork": 0.72,
+      "utility": 0.55,
+      "discipline": 0.78,
+      "aggression": 0.35
+    },
+    "loadoutWeaponIds": [
+      "weapon.rifle.m4_like",
+      "weapon.pistol.default"
+    ],
+    "loadoutUtilityIds": [
+      "util.cs.molotov",
+      "util.cs.smoke",
+      "util.cs.flash"
+    ]
+  }
+]

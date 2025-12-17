@@ -1,0 +1,373 @@
+[
+  {
+    "id": "util.val.smoke_marker",
+    "family": "VAL_Ability",
+    "castType": "PlaceMarker",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 100,
+    "isSignature": true,
+    "roundStartCharges": 1,
+    "effects": [
+      {
+        "kind": "Smoke",
+        "duration": 14.0,
+        "radius": 4.25,
+        "dpsOrValue": 1.0,
+        "falloff": 0.1,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "util.val.flash_projectile",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.35,
+    "castTime": 0.1,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 250,
+    "projectile": {
+      "speed": 24.0,
+      "gravity": 0.0,
+      "maxLife": 2.0,
+      "bounces": true,
+      "bounceDamp": 0.6
+    },
+    "effects": [
+      {
+        "kind": "FlashBlind",
+        "duration": 1.75,
+        "radius": 9.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.1,
+        "requiresLOS": true,
+        "requiresFacing": true,
+        "facingAngleDeg": 170
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.molly",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.35,
+    "castTime": 0.1,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 250,
+    "projectile": {
+      "speed": 22.0,
+      "gravity": 9.81,
+      "maxLife": 2.0,
+      "bounces": false,
+      "bounceDamp": 0.0
+    },
+    "effects": [
+      {
+        "kind": "Burn",
+        "duration": 7.0,
+        "radius": 3.5,
+        "dpsOrValue": 18.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.recon_pulse",
+    "family": "VAL_Ability",
+    "castType": "InstantAOE",
+    "equipTime": 0.25,
+    "castTime": 0.05,
+    "maxCharges": 1,
+    "cooldown": 30.0,
+    "creditCost": 0,
+    "effects": [
+      {
+        "kind": "Reveal",
+        "duration": 2.0,
+        "radius": 16.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": true,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.suppress",
+    "family": "VAL_Ability",
+    "castType": "InstantAOE",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 1,
+    "cooldown": 40.0,
+    "creditCost": 0,
+    "effects": [
+      {
+        "kind": "Suppress",
+        "duration": 6.0,
+        "radius": 14.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.wall",
+    "family": "VAL_Ability",
+    "castType": "PlaceMarker",
+    "equipTime": 0.4,
+    "castTime": 0.2,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 400,
+    "effects": [
+      {
+        "kind": "Wall",
+        "duration": 30.0,
+        "radius": 0.0,
+        "dpsOrValue": 800.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.trap_slow_reveal",
+    "family": "VAL_Ability",
+    "castType": "Self",
+    "equipTime": 0.35,
+    "castTime": 0.2,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 200,
+    "effects": [
+      {
+        "kind": "Trap",
+        "duration": 999.0,
+        "radius": 3.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      },
+      {
+        "kind": "Slow",
+        "duration": 4.0,
+        "radius": 6.0,
+        "dpsOrValue": 0.4,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      },
+      {
+        "kind": "Reveal",
+        "duration": 2.0,
+        "radius": 6.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.dash",
+    "family": "VAL_Ability",
+    "castType": "Self",
+    "equipTime": 0.05,
+    "castTime": 0.0,
+    "maxCharges": 1,
+    "cooldown": 25.0,
+    "creditCost": 0,
+    "effects": [],
+    "isSignature": true,
+    "roundStartCharges": 1
+  },
+  {
+    "id": "util.val.heal",
+    "family": "VAL_Ability",
+    "castType": "Beam",
+    "equipTime": 0.25,
+    "castTime": 0.1,
+    "maxCharges": 1,
+    "cooldown": 35.0,
+    "creditCost": 0,
+    "effects": [
+      {
+        "kind": "Heal",
+        "duration": 3.0,
+        "radius": 8.0,
+        "dpsOrValue": 25.0,
+        "falloff": 0.0,
+        "requiresLOS": true,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ],
+    "isSignature": false,
+    "roundStartCharges": 0
+  },
+  {
+    "id": "util.val.incendiary_zone",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.35,
+    "castTime": 0.1,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 250,
+    "isSignature": false,
+    "roundStartCharges": 0,
+    "projectile": {
+      "speed": 22.0,
+      "gravity": 9.81,
+      "maxLife": 2.0,
+      "bounces": false,
+      "bounceDamp": 0.0
+    },
+    "effects": [
+      {
+        "kind": "Burn",
+        "duration": 7.0,
+        "radius": 3.5,
+        "dpsOrValue": 18.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "util.val.flash_line",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.25,
+    "castTime": 0.05,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 150,
+    "isSignature": false,
+    "roundStartCharges": 0,
+    "projectile": {
+      "speed": 30.0,
+      "gravity": 2.0,
+      "maxLife": 1.5,
+      "bounces": false,
+      "bounceDamp": 0.0
+    },
+    "effects": [
+      {
+        "kind": "FlashBlind",
+        "duration": 1.75,
+        "radius": 10.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": true,
+        "requiresFacing": true,
+        "facingAngleDeg": 160
+      }
+    ]
+  },
+  {
+    "id": "util.val.flash_pop",
+    "family": "VAL_Ability",
+    "castType": "ThrowArc",
+    "equipTime": 0.25,
+    "castTime": 0.05,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 150,
+    "isSignature": false,
+    "roundStartCharges": 0,
+    "throw": {
+      "speed": 18.0,
+      "gravity": 9.81,
+      "fuseTime": 0.35,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "FlashBlind",
+        "duration": 1.5,
+        "radius": 9.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": true,
+        "requiresFacing": true,
+        "facingAngleDeg": 170
+      }
+    ]
+  },
+  {
+    "id": "util.val.grenade_cluster",
+    "family": "VAL_Ability",
+    "castType": "ThrowArc",
+    "equipTime": 0.3,
+    "castTime": 0.08,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 200,
+    "isSignature": false,
+    "roundStartCharges": 0,
+    "throw": {
+      "speed": 18.0,
+      "gravity": 9.81,
+      "fuseTime": 1.2,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "Explosion",
+        "duration": 0.01,
+        "radius": 6.0,
+        "dpsOrValue": 65.0,
+        "falloff": 0.65,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      },
+      {
+        "kind": "Concuss",
+        "duration": 2.0,
+        "radius": 7.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "agent.val.duelist",
+    "displayName": "Duelist (VAL Sample)",
+    "baseHp": 100,
+    "baseArmor": 50,
+    "traits": {
+      "aim": 0.74,
+      "recoilControl": 0.64,
+      "reaction": 0.77,
+      "movement": 0.82,
+      "gameSense": 0.55,
+      "composure": 0.48,
+      "teamwork": 0.52,
+      "utility": 0.46,
+      "discipline": 0.5,
+      "aggression": 0.82
+    },
+    "loadoutWeaponIds": [
+      "weapon.rifle.ak_like",
+      "weapon.pistol.default"
+    ],
+    "loadoutUtilityIds": [
+      "util.val.flash_projectile",
+      "util.val.molly",
+      "util.val.smoke_marker"
+    ]
+  },
+  {
+    "id": "agent.val.sentinel",
+    "displayName": "Sentinel (VAL Sample)",
+    "baseHp": 100,
+    "baseArmor": 50,
+    "traits": {
+      "aim": 0.64,
+      "recoilControl": 0.66,
+      "reaction": 0.63,
+      "movement": 0.56,
+      "gameSense": 0.8,
+      "composure": 0.72,
+      "teamwork": 0.74,
+      "utility": 0.62,
+      "discipline": 0.8,
+      "aggression": 0.32
+    },
+    "loadoutWeaponIds": [
+      "weapon.rifle.m4_like",
+      "weapon.pistol.default"
+    ],
+    "loadoutUtilityIds": [
+      "util.val.smoke_marker",
+      "util.val.recon_pulse",
+      "util.val.trap_slow_reveal"
+    ]
+  }
+]

@@ -1,0 +1,245 @@
+[
+  {
+    "id": "weapon.rifle.ak_like",
+    "fireMode": "Auto",
+    "creditCost": 2900,
+    "magazineSize": 30,
+    "roundsPerMinute": 600,
+    "reloadTime": 2.5,
+    "damage": {
+      "baseDamage": 36,
+      "headMult": 4.0,
+      "legMult": 0.75,
+      "rangeMultiplierKeys": [
+        {
+          "x": 0,
+          "y": 1.0
+        },
+        {
+          "x": 30,
+          "y": 1.0
+        },
+        {
+          "x": 50,
+          "y": 0.9
+        },
+        {
+          "x": 80,
+          "y": 0.8
+        }
+      ]
+    },
+    "spread": {
+      "baseSigma": 0.006,
+      "crouchMult": 0.85,
+      "moveSigmaAdd": 0.01,
+      "jumpSigmaAdd": 0.05,
+      "firstShotBonus": -0.001
+    },
+    "recoil": {
+      "recoilPerShot": 0.12,
+      "maxRecoil": 2.0,
+      "recoveryPerSec": 1.2
+    },
+    "penetration": {
+      "canPenetrate": true,
+      "penPower": 2.0,
+      "damageLossPerUnit": 0.2
+    },
+    "creditCost": 2700
+  },
+  {
+    "id": "weapon.rifle.m4_like",
+    "fireMode": "Auto",
+    "creditCost": 3100,
+    "magazineSize": 30,
+    "roundsPerMinute": 666,
+    "reloadTime": 2.3,
+    "damage": {
+      "baseDamage": 33,
+      "headMult": 4.0,
+      "legMult": 0.75,
+      "rangeMultiplierKeys": [
+        {
+          "x": 0,
+          "y": 1.0
+        },
+        {
+          "x": 30,
+          "y": 1.0
+        },
+        {
+          "x": 50,
+          "y": 0.92
+        },
+        {
+          "x": 80,
+          "y": 0.82
+        }
+      ]
+    },
+    "spread": {
+      "baseSigma": 0.0055,
+      "crouchMult": 0.85,
+      "moveSigmaAdd": 0.01,
+      "jumpSigmaAdd": 0.05,
+      "firstShotBonus": -0.0012
+    },
+    "recoil": {
+      "recoilPerShot": 0.1,
+      "maxRecoil": 1.8,
+      "recoveryPerSec": 1.3
+    },
+    "penetration": {
+      "canPenetrate": true,
+      "penPower": 2.2,
+      "damageLossPerUnit": 0.18
+    },
+    "creditCost": 3100
+  },
+  {
+    "id": "weapon.pistol.default",
+    "fireMode": "Semi",
+    "creditCost": 0,
+    "magazineSize": 12,
+    "roundsPerMinute": 420,
+    "reloadTime": 1.6,
+    "damage": {
+      "baseDamage": 26,
+      "headMult": 2.5,
+      "legMult": 0.85,
+      "rangeMultiplierKeys": [
+        {
+          "x": 0,
+          "y": 1.0
+        },
+        {
+          "x": 25,
+          "y": 1.0
+        },
+        {
+          "x": 40,
+          "y": 0.85
+        },
+        {
+          "x": 70,
+          "y": 0.7
+        }
+      ]
+    },
+    "spread": {
+      "baseSigma": 0.007,
+      "crouchMult": 0.9,
+      "moveSigmaAdd": 0.012,
+      "jumpSigmaAdd": 0.06,
+      "firstShotBonus": -0.0008
+    },
+    "recoil": {
+      "recoilPerShot": 0.08,
+      "maxRecoil": 1.2,
+      "recoveryPerSec": 1.6
+    },
+    "penetration": {
+      "canPenetrate": false,
+      "penPower": 0.0,
+      "damageLossPerUnit": 0.0
+    },
+    "creditCost": 800
+  },
+  {
+    "id": "weapon.rifle.vandal_like",
+    "fireMode": "Auto",
+    "magazineSize": 30,
+    "roundsPerMinute": 600,
+    "reloadTime": 2.5,
+    "damage": {
+      "baseDamage": 36,
+      "headMult": 4.0,
+      "legMult": 0.75,
+      "rangeMultiplierKeys": [
+        {
+          "x": 0,
+          "y": 1.0
+        },
+        {
+          "x": 30,
+          "y": 1.0
+        },
+        {
+          "x": 50,
+          "y": 0.9
+        },
+        {
+          "x": 80,
+          "y": 0.8
+        }
+      ]
+    },
+    "spread": {
+      "baseSigma": 0.006,
+      "crouchMult": 0.85,
+      "moveSigmaAdd": 0.01,
+      "jumpSigmaAdd": 0.05,
+      "firstShotBonus": -0.001
+    },
+    "recoil": {
+      "recoilPerShot": 0.12,
+      "maxRecoil": 2.0,
+      "recoveryPerSec": 1.2
+    },
+    "penetration": {
+      "canPenetrate": true,
+      "penPower": 2.0,
+      "damageLossPerUnit": 0.2
+    },
+    "creditCost": 2900
+  },
+  {
+    "id": "weapon.rifle.phantom_like",
+    "fireMode": "Auto",
+    "magazineSize": 30,
+    "roundsPerMinute": 666,
+    "reloadTime": 2.3,
+    "damage": {
+      "baseDamage": 33,
+      "headMult": 4.0,
+      "legMult": 0.75,
+      "rangeMultiplierKeys": [
+        {
+          "x": 0,
+          "y": 1.0
+        },
+        {
+          "x": 30,
+          "y": 1.0
+        },
+        {
+          "x": 50,
+          "y": 0.92
+        },
+        {
+          "x": 80,
+          "y": 0.82
+        }
+      ]
+    },
+    "spread": {
+      "baseSigma": 0.0055,
+      "crouchMult": 0.85,
+      "moveSigmaAdd": 0.01,
+      "jumpSigmaAdd": 0.05,
+      "firstShotBonus": -0.0012
+    },
+    "recoil": {
+      "recoilPerShot": 0.1,
+      "maxRecoil": 1.8,
+      "recoveryPerSec": 1.3
+    },
+    "penetration": {
+      "canPenetrate": true,
+      "penPower": 2.2,
+      "damageLossPerUnit": 0.18
+    },
+    "creditCost": 2900
+  }
+]
