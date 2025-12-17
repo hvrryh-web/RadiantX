@@ -30,32 +30,32 @@ func is_suppressed() -> bool:
 	return suppress_timer > 0.0
 
 func apply_flash(duration: float, intensity: float = 1.0):
-	"""Apply flash effect"""
+	##Apply flash effect##
 	flash_timer = maxf(flash_timer, duration * intensity)
 
 func apply_concuss(duration: float):
-	"""Apply concussion effect"""
+	##Apply concussion effect##
 	concuss_timer = maxf(concuss_timer, duration)
 
 func apply_slow(duration: float):
-	"""Apply slow effect"""
+	##Apply slow effect##
 	slow_timer = maxf(slow_timer, duration)
 
 func apply_burn(duration: float, dps: float):
-	"""Apply burn effect"""
+	##Apply burn effect##
 	burn_timer = maxf(burn_timer, duration)
 	burn_dps = dps
 
 func apply_reveal(duration: float):
-	"""Apply reveal effect"""
+	##Apply reveal effect##
 	reveal_timer = maxf(reveal_timer, duration)
 
 func apply_suppress(duration: float):
-	"""Apply suppress effect"""
+	##Apply suppress effect##
 	suppress_timer = maxf(suppress_timer, duration)
 
 func update(delta: float) -> float:
-	"""Update status timers, returns burn damage for this frame"""
+	##Update status timers, returns burn damage for this frame##
 	var burn_damage = 0.0
 	
 	if flash_timer > 0:
@@ -77,7 +77,7 @@ func update(delta: float) -> float:
 	return burn_damage
 
 func clear():
-	"""Clear all status effects"""
+	##Clear all status effects##
 	flash_timer = 0.0
 	concuss_timer = 0.0
 	slow_timer = 0.0

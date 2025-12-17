@@ -25,7 +25,7 @@ func is_loaded() -> bool:
 	return _loaded
 
 func load_all(base_path: String = "res://Defs") -> bool:
-	"""Load all definitions from the Defs directory"""
+	##Load all definitions from the Defs directory##
 	_loaded = false
 	
 	var success = true
@@ -41,7 +41,7 @@ func load_all(base_path: String = "res://Defs") -> bool:
 	return success
 
 func _load_directory(dir_path: String, target: Dictionary, parser: Callable) -> bool:
-	"""Load all JSON files from a directory"""
+	##Load all JSON files from a directory##
 	var dir = DirAccess.open(dir_path)
 	if not dir:
 		push_warning("Directory not found: " + dir_path)
@@ -62,7 +62,7 @@ func _load_directory(dir_path: String, target: Dictionary, parser: Callable) -> 
 	return true
 
 func _load_json_file(file_path: String, target: Dictionary, parser: Callable) -> bool:
-	"""Load a single JSON file"""
+	##Load a single JSON file##
 	if not FileAccess.file_exists(file_path):
 		push_error("File not found: " + file_path)
 		return false
@@ -116,7 +116,7 @@ func _parse_ruleset(data: Dictionary) -> RulesetDef:
 	return RulesetDef.new(data)
 
 func _validate_references() -> bool:
-	"""Validate that all ID references are valid"""
+	##Validate that all ID references are valid##
 	var valid = true
 	
 	# Validate agent loadouts reference valid weapons and utilities
@@ -161,7 +161,7 @@ func get_all_rulesets() -> Array:
 	return rulesets.values()
 
 func get_utilities_by_family(family: int) -> Array:
-	"""Get all utilities of a specific family (CS_Grenade or VAL_Ability)"""
+	##Get all utilities of a specific family (CS_Grenade or VAL_Ability)##
 	var result = []
 	for utility in utilities.values():
 		if utility.family == family:

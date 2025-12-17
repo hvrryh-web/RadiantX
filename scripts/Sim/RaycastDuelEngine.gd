@@ -18,7 +18,7 @@ func set_map(map: MapData):
 	map_data = map
 
 func simulate(context: DuelContext) -> DuelResult:
-	"""Simulate a full duel with raycasts"""
+	##Simulate a full duel with raycasts##
 	var result = DuelResult.new()
 	
 	# Clone states for simulation
@@ -76,7 +76,7 @@ func simulate(context: DuelContext) -> DuelResult:
 	return result
 
 func _can_fire(agent: AgentState, weapon_def: WeaponDef) -> bool:
-	"""Check if agent can fire"""
+	##Check if agent can fire##
 	if agent.reaction_timer > 0:
 		return false
 	if agent.is_flashed() and agent.status.flash_timer > 1.0:
@@ -86,7 +86,7 @@ func _can_fire(agent: AgentState, weapon_def: WeaponDef) -> bool:
 	return agent.weapon.can_fire()
 
 func _fire_shot(shooter: AgentState, target: AgentState, context: DuelContext, time: float) -> SimEvent.ShotEvent:
-	"""Fire a single shot using raycast"""
+	##Fire a single shot using raycast##
 	var event = SimEvent.ShotEvent.new(time, shooter.entity_id, target.entity_id, 
 									   shooter.weapon.weapon_id)
 	
@@ -116,7 +116,7 @@ func _fire_shot(shooter: AgentState, target: AgentState, context: DuelContext, t
 	return event
 
 func _raycast(from: Vector2, to: Vector2, target: AgentState) -> Dictionary:
-	"""Perform raycast, returns hit information"""
+	##Perform raycast, returns hit information##
 	var result = {"hit_target": false, "hit_wall": false, "hit_pos": to}
 	
 	# Check map occlusion first
@@ -136,7 +136,7 @@ func _raycast(from: Vector2, to: Vector2, target: AgentState) -> Dictionary:
 	return result
 
 func _closest_point_on_line(line_start: Vector2, line_end: Vector2, point: Vector2) -> Vector2:
-	"""Find closest point on line segment to given point"""
+	##Find closest point on line segment to given point##
 	var line = line_end - line_start
 	var len_squared = line.length_squared()
 	if len_squared == 0:
@@ -145,7 +145,7 @@ func _closest_point_on_line(line_start: Vector2, line_end: Vector2, point: Vecto
 	return line_start + t * line
 
 func _determine_hit_zone(context: DuelContext) -> int:
-	"""Determine which body zone was hit"""
+	##Determine which body zone was hit##
 	var head_share = context.compute_head_share()
 	var leg_share = 0.1  # 10% leg hits
 	
@@ -158,14 +158,14 @@ func _determine_hit_zone(context: DuelContext) -> int:
 		return DataTypes.HitZone.LEGS
 
 func _sample_gaussian(mean: float, std_dev: float) -> float:
-	"""Sample from Gaussian distribution using Box-Muller transform"""
+	##Sample from Gaussian distribution using Box-Muller transform##
 	var u1 = maxf(0.0001, rng.randf())  # Avoid log(0)
 	var u2 = rng.randf()
 	var z = sqrt(-2.0 * log(u1)) * cos(TAU * u2)
 	return mean + std_dev * z
 
 func _clone_agent_state(state: AgentState) -> AgentState:
-	"""Create a copy of agent state for simulation"""
+	##Create a copy of agent state for simulation##
 	if not state:
 		return AgentState.new()
 	
@@ -191,8 +191,8 @@ func _clone_agent_state(state: AgentState) -> AgentState:
 
 ## Check smoke occlusion along ray
 func check_smoke_occlusion(from: Vector2, to: Vector2, smoke_volumes: Array) -> float:
-	"""Calculate accumulated smoke density along a ray
-	Returns 0..1 opacity (0 = clear, 1 = fully blocked)"""
+	##Calculate accumulated smoke density along a ray
+	Returns 0..1 opacity (0 = clear, 1 = fully blocked)##
 	var total_density = 0.0
 	var ray_length = from.distance_to(to)
 	

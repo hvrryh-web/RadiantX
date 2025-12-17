@@ -33,7 +33,7 @@ func set_spectator_viewport(viewport: Rect2):
 func resolve_duel(context: DuelContext, 
 				   alive_attackers: int = 5, 
 				   alive_defenders: int = 5) -> DuelResult:
-	"""Resolve a duel using appropriate engine based on LOD"""
+	##Resolve a duel using appropriate engine based on LOD##
 	var lod = _determine_lod(context, alive_attackers, alive_defenders)
 	
 	match lod:
@@ -50,7 +50,7 @@ func resolve_duel(context: DuelContext,
 func _determine_lod(context: DuelContext, 
 					 alive_attackers: int, 
 					 alive_defenders: int) -> LODLevel:
-	"""Determine which LOD level to use for this duel"""
+	##Determine which LOD level to use for this duel##
 	
 	# Check if in spectator viewport
 	if _is_in_viewport(context):
@@ -68,7 +68,7 @@ func _determine_lod(context: DuelContext,
 	return LODLevel.LOW
 
 func _is_in_viewport(context: DuelContext) -> bool:
-	"""Check if duel is within spectator viewport"""
+	##Check if duel is within spectator viewport##
 	if not context.shooter_state or not context.target_state:
 		return false
 	
@@ -76,13 +76,13 @@ func _is_in_viewport(context: DuelContext) -> bool:
 		   spectator_viewport.has_point(context.target_state.pos)
 
 func _is_clutch(alive_attackers: int, alive_defenders: int) -> bool:
-	"""Check if this is a clutch situation"""
+	##Check if this is a clutch situation##
 	return alive_attackers <= clutch_threshold or alive_defenders <= clutch_threshold
 
 func _estimate_round_impact(context: DuelContext, 
 							 alive_attackers: int, 
 							 alive_defenders: int) -> float:
-	"""Estimate how much this duel affects round outcome"""
+	##Estimate how much this duel affects round outcome##
 	var total_alive = alive_attackers + alive_defenders
 	if total_alive <= 2:
 		return 1.0  # Very high impact
@@ -94,7 +94,7 @@ func _estimate_round_impact(context: DuelContext,
 	return clampf(base_impact, 0.0, 1.0)
 
 func _summary_to_result(summary: Dictionary, context: DuelContext) -> DuelResult:
-	"""Convert TTK engine summary to DuelResult"""
+	##Convert TTK engine summary to DuelResult##
 	var result = DuelResult.new()
 	
 	# Use median TTK
@@ -126,7 +126,7 @@ func _summary_to_result(summary: Dictionary, context: DuelContext) -> DuelResult
 
 ## Batch resolution for multiple duels
 func resolve_batch(contexts: Array, alive_attackers: int = 5, alive_defenders: int = 5) -> Array:
-	"""Resolve multiple duels efficiently"""
+	##Resolve multiple duels efficiently##
 	var results = []
 	
 	# Sort by importance (high LOD first)
@@ -142,8 +142,8 @@ func resolve_batch(contexts: Array, alive_attackers: int = 5, alive_defenders: i
 
 ## Quick win probability check without full simulation
 func quick_compare(context_a: DuelContext, context_b: DuelContext) -> int:
-	"""Quick comparison of two duel contexts
-	Returns: 1 if A wins, -1 if B wins, 0 if uncertain"""
+	##Quick comparison of two duel contexts
+	Returns: 1 if A wins, -1 if B wins, 0 if uncertain##
 	var prob_a = ttk_engine.quick_win_probability(context_a)
 	var prob_b = ttk_engine.quick_win_probability(context_b)
 	

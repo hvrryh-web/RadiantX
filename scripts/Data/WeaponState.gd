@@ -21,7 +21,7 @@ func can_fire() -> bool:
 	return fire_cooldown <= 0.0 and not is_reloading() and ammo_in_mag > 0
 
 func update(delta: float, weapon_def: WeaponDef):
-	"""Update weapon state for this frame"""
+	##Update weapon state for this frame##
 	# Update fire cooldown
 	if fire_cooldown > 0:
 		fire_cooldown = maxf(0.0, fire_cooldown - delta)
@@ -38,7 +38,7 @@ func update(delta: float, weapon_def: WeaponDef):
 		recoil = maxf(0.0, recoil - weapon_def.recoil.recovery_per_sec * delta)
 
 func fire(weapon_def: WeaponDef):
-	"""Fire the weapon"""
+	##Fire the weapon##
 	if not can_fire():
 		return
 	
@@ -50,7 +50,7 @@ func fire(weapon_def: WeaponDef):
 		recoil = minf(recoil + weapon_def.recoil.recoil_per_shot, weapon_def.recoil.max_recoil)
 
 func start_reload(weapon_def: WeaponDef):
-	"""Start reloading the weapon"""
+	##Start reloading the weapon##
 	if not is_reloading() and ammo_in_mag < weapon_def.magazine_size:
 		reload_timer = weapon_def.reload_time
 

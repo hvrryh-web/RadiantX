@@ -12,7 +12,7 @@ func _init(key_data: Array = []):
 			keys.append({"x": float(key.x), "y": float(key.y)})
 
 func evaluate(x: float) -> float:
-	"""Linear interpolate between keys to get value at x"""
+	##Linear interpolate between keys to get value at x##
 	if keys.is_empty():
 		return 1.0
 	
@@ -38,5 +38,5 @@ func evaluate(x: float) -> float:
 	return 1.0
 
 static func from_array(arr: Array) -> AnimCurve:
-	"""Create curve from array of {x, y} dictionaries"""
+	##Create curve from array of {x, y} dictionaries##
 	return AnimCurve.new(arr)

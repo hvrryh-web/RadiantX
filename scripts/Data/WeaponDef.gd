@@ -40,7 +40,7 @@ func _init(data: Dictionary = {}):
 		penetration = PenetrationProfile.new(data.penetration)
 
 func get_fire_interval() -> float:
-	"""Get time between shots in seconds"""
+	##Get time between shots in seconds##
 	return 60.0 / rounds_per_minute
 
 func to_dict() -> Dictionary:

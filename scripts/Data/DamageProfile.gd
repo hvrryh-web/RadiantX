@@ -21,7 +21,7 @@ func _init(data: Dictionary = {}):
 		range_multiplier = AnimCurve.from_array(data.rangeMultiplierKeys)
 
 func get_damage_for_zone(zone: int, distance: float) -> float:
-	"""Calculate damage for a hit zone at a given distance"""
+	##Calculate damage for a hit zone at a given distance##
 	var range_mult = range_multiplier.evaluate(distance)
 	var zone_mult = 1.0
 	

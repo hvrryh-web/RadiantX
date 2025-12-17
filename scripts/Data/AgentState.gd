@@ -26,6 +26,7 @@ func _init(agent_def: AgentDef = null, id: int = 0):
 		agent_id = agent_def.id
 		entity_id = id
 		hp = agent_def.base_hp
+		max_hp = agent_def.base_hp
 		armor = agent_def.base_armor
 
 func is_alive() -> bool:
@@ -41,7 +42,7 @@ func can_use_utility() -> bool:
 	return not is_suppressed()
 
 func take_damage(amount: float) -> float:
-	"""Take damage, returns actual damage dealt"""
+	##Take damage, returns actual damage dealt##
 	var actual_damage = amount
 	
 	# Apply armor mitigation (simple model)
@@ -53,17 +54,19 @@ func take_damage(amount: float) -> float:
 	hp = maxf(0.0, hp - actual_damage)
 	return actual_damage
 
-func heal(amount: float):
-	"""Heal the agent"""
-	# Note: would need max_hp reference for proper clamping
-	hp += amount
+var max_hp: float = 100.0  # Maximum HP for clamping heals
+
+func heal(amount: float, cap: float = -1.0):
+	## Heal the agent, clamped to max_hp
+	var max_val = cap if cap > 0 else max_hp
+	hp = minf(hp + amount, max_val)
 
 func add_stress(amount: float):
-	"""Add stress/suppression"""
+	##Add stress/suppression##
 	stress = clampf(stress + amount, 0.0, 1.0)
 
 func update(delta: float):
-	"""Update agent state for this frame"""
+	##Update agent state for this frame##
 	# Update reaction timer
 	if reaction_timer > 0:
 		reaction_timer = maxf(0.0, reaction_timer - delta)
@@ -77,13 +80,13 @@ func update(delta: float):
 	stress = maxf(0.0, stress - 0.1 * delta)
 
 func get_utility_state(utility_id: String) -> UtilityState:
-	"""Get utility state by ID"""
+	##Get utility state by ID##
 	if utilities.has(utility_id):
 		return utilities[utility_id]
 	return null
 
 func add_utility(utility_def: UtilityDef):
-	"""Add a utility to the agent's inventory"""
+	##Add a utility to the agent's inventory##
 	utilities[utility_def.id] = UtilityState.new(utility_def)
 
 func to_dict() -> Dictionary:

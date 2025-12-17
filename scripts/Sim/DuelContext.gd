@@ -35,7 +35,7 @@ func _init(s_state: AgentState = null, t_state: AgentState = null):
 		target_speed = target_state.vel.length()
 
 func compute_aim_sigma() -> float:
-	"""Compute effective aim sigma for the shooter"""
+	##Compute effective aim sigma for the shooter##
 	if not weapon_def or not weapon_def.spread:
 		return 0.1  # Default fallback
 	
@@ -76,7 +76,7 @@ func compute_aim_sigma() -> float:
 	return sigma
 
 func compute_reaction_time() -> float:
-	"""Compute reaction time for the shooter"""
+	##Compute reaction time for the shooter##
 	var base_reaction = 0.25  # Base reaction time in seconds
 	
 	if shooter_def and shooter_def.traits:
@@ -94,7 +94,7 @@ func compute_reaction_time() -> float:
 	return base_reaction
 
 func compute_target_angular_radius() -> float:
-	"""Compute the angular radius of the target from shooter's perspective"""
+	##Compute the angular radius of the target from shooter's perspective##
 	if distance <= 0:
 		return PI / 4  # Very close, large angle
 	
@@ -102,7 +102,7 @@ func compute_target_angular_radius() -> float:
 	return atan2(effective_radius, distance)
 
 func compute_hit_probability() -> float:
-	"""Compute probability of hitting the target"""
+	##Compute probability of hitting the target##
 	var sigma = compute_aim_sigma()
 	var r_ang = compute_target_angular_radius()
 	
@@ -114,7 +114,7 @@ func compute_hit_probability() -> float:
 	return 1.0 - exp(-(r_ang * r_ang) / (2.0 * sigma * sigma))
 
 func compute_head_share() -> float:
-	"""Compute probability that a hit is a headshot"""
+	##Compute probability that a hit is a headshot##
 	var base_head_share = 0.15  # Base headshot probability
 	
 	if shooter_def and shooter_def.traits:
@@ -137,7 +137,7 @@ func compute_head_share() -> float:
 	return clampf(base_head_share, 0.05, 0.5)
 
 func get_shot_interval() -> float:
-	"""Get time between shots"""
+	##Get time between shots##
 	if weapon_def:
 		return weapon_def.get_fire_interval()
 	return 0.1  # Default 10 shots per second

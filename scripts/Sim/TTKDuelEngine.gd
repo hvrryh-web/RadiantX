@@ -14,7 +14,7 @@ func set_seed(seed: int):
 	rng.seed = seed
 
 func simulate(context: DuelContext, num_iterations: int = 64) -> Dictionary:
-	"""Run Monte Carlo simulation and return TTK distribution"""
+	##Run Monte Carlo simulation and return TTK distribution##
 	var results = []
 	
 	for i in range(num_iterations):
@@ -94,7 +94,7 @@ func _simulate_single(context: DuelContext, iteration: int) -> DuelResult:
 	return result
 
 func _summarize_results(results: Array, context: DuelContext) -> Dictionary:
-	"""Summarize Monte Carlo results into statistics"""
+	##Summarize Monte Carlo results into statistics##
 	var ttks = []
 	var wins = 0
 	var total_shots = 0
@@ -142,7 +142,7 @@ func _percentile(sorted_values: Array, p: float) -> float:
 	return sorted_values[index]
 
 func quick_win_probability(context: DuelContext) -> float:
-	"""Quick approximation of win probability without full simulation"""
+	##Quick approximation of win probability without full simulation##
 	var p_hit = context.compute_hit_probability()
 	var shot_interval = context.get_shot_interval()
 	var target_hp = context.target_state.hp if context.target_state else 100.0

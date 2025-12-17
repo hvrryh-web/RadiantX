@@ -19,12 +19,12 @@ func is_on_cooldown() -> bool:
 	return cooldown_timer > 0.0
 
 func update(delta: float):
-	"""Update utility state for this frame"""
+	##Update utility state for this frame##
 	if cooldown_timer > 0:
 		cooldown_timer = maxf(0.0, cooldown_timer - delta)
 
 func use(utility_def: UtilityDef) -> bool:
-	"""Use the utility, returns true if successful"""
+	##Use the utility, returns true if successful##
 	if not can_use():
 		return false
 	
@@ -35,11 +35,11 @@ func use(utility_def: UtilityDef) -> bool:
 	return true
 
 func add_charge(count: int = 1):
-	"""Add charges (e.g., from purchase or round reset)"""
+	##Add charges (e.g., from purchase or round reset)##
 	charges += count
 
 func reset(utility_def: UtilityDef):
-	"""Reset to full charges"""
+	##Reset to full charges##
 	charges = utility_def.max_charges
 	cooldown_timer = 0.0
 
