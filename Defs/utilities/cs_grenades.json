@@ -1,0 +1,158 @@
+[
+  {
+    "id": "util.smoke.cs",
+    "family": "CS_Grenade",
+    "castType": "ThrowArc",
+    "equipTime": 0.4,
+    "castTime": 0.15,
+    "maxCharges": 1,
+    "throw": {
+      "speed": 18.0,
+      "gravity": 9.81,
+      "fuseTime": 1.5,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "Smoke",
+        "duration": 18.0,
+        "radius": 4.5,
+        "dpsOrValue": 1.0,
+        "falloff": 0.15,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "util.flash.cs",
+    "family": "CS_Grenade",
+    "castType": "ThrowArc",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 2,
+    "throw": {
+      "speed": 20.0,
+      "gravity": 9.81,
+      "fuseTime": 1.2,
+      "detonateOnRest": false
+    },
+    "effects": [
+      {
+        "kind": "FlashBlind",
+        "duration": 2.5,
+        "radius": 12.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.3,
+        "requiresLOS": true,
+        "requiresFacing": true,
+        "facingAngleDeg": 160
+      }
+    ]
+  },
+  {
+    "id": "util.he.cs",
+    "family": "CS_Grenade",
+    "castType": "ThrowArc",
+    "equipTime": 0.35,
+    "castTime": 0.12,
+    "maxCharges": 1,
+    "throw": {
+      "speed": 17.0,
+      "gravity": 9.81,
+      "fuseTime": 1.6,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "Concuss",
+        "duration": 0.1,
+        "radius": 8.0,
+        "dpsOrValue": 85.0,
+        "falloff": 0.6,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "util.molotov.cs",
+    "family": "CS_Grenade",
+    "castType": "ThrowArc",
+    "equipTime": 0.45,
+    "castTime": 0.15,
+    "maxCharges": 1,
+    "throw": {
+      "speed": 16.0,
+      "gravity": 9.81,
+      "fuseTime": 0.0,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "Burn",
+        "duration": 7.0,
+        "radius": 3.5,
+        "dpsOrValue": 18.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "util.incendiary.cs",
+    "family": "CS_Grenade",
+    "castType": "ThrowArc",
+    "equipTime": 0.45,
+    "castTime": 0.15,
+    "maxCharges": 1,
+    "throw": {
+      "speed": 16.0,
+      "gravity": 9.81,
+      "fuseTime": 0.0,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "Burn",
+        "duration": 7.0,
+        "radius": 3.5,
+        "dpsOrValue": 18.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "util.decoy.cs",
+    "family": "CS_Grenade",
+    "castType": "ThrowArc",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 1,
+    "throw": {
+      "speed": 18.0,
+      "gravity": 9.81,
+      "fuseTime": 0.5,
+      "detonateOnRest": true
+    },
+    "effects": [
+      {
+        "kind": "DecoySound",
+        "duration": 15.0,
+        "radius": 25.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  }
+]
