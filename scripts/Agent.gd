@@ -27,11 +27,20 @@ var communication_delay: int = 2  # ticks
 
 # Tactical
 var is_flashed_until: int = 0
-var smoke_positions: Array[Vector2] = []
+var smoke_data: Array[Dictionary] = []  # {position: Vector2, expire_tick: int}
+var smoke_positions: Array[Vector2] = []  # Derived from smoke_data for visibility checks
 var pending_smoke: Vector2 = Vector2.ZERO
 var pending_flash: Vector2 = Vector2.ZERO
 var has_smoke_pending: bool = false
 var has_flash_pending: bool = false
+
+# Combat constants
+const INITIAL_SHOT_TICK: int = -100  # Initial value ensuring first shot is always allowed
+const FIRE_RATE_TICKS: int = 4       # 5 shots per second at 20 TPS
+const SMOKE_DURATION: int = 300      # 15 seconds at 20 TPS
+
+# Combat state
+var last_shot_tick: int = INITIAL_SHOT_TICK
 
 # Movement
 var move_speed: float = 5.0
@@ -40,16 +49,18 @@ var target_position: Vector2 = Vector2.ZERO
 func _ready():
 	add_to_group("agents")
 
-func reset(seed: int):
+func reset():
 	"""Reset agent to initial state"""
 	health = max_health
 	current_state = State.IDLE
 	current_target = null
 	beliefs.clear()
 	last_seen.clear()
+	smoke_data.clear()
 	smoke_positions.clear()
 	is_flashed_until = 0
 	velocity = Vector2.ZERO
+	last_shot_tick = INITIAL_SHOT_TICK
 
 func update_beliefs(current_tick: int, all_agents: Array[Agent], map_data: MapData):
 	"""Update agent's beliefs about other agents (partial observability)"""
@@ -112,25 +123,34 @@ func _closest_point_on_line(line_start: Vector2, line_end: Vector2, point: Vecto
 	var t = clamp((point - line_start).dot(line) / len_squared, 0.0, 1.0)
 	return line_start + t * line
 
-func make_decision(current_tick: int, rng: RandomNumberGenerator):
+func make_decision(current_tick: int, rng: RandomNumberGenerator, all_agents: Array[Agent]):
 	"""Make tactical decision based on beliefs"""
 	if not is_alive():
 		return
 	
-	# Find enemies in beliefs
+	# Find enemies in beliefs (sort keys for deterministic iteration)
 	var known_enemies = []
-	for agent_id in beliefs:
+	var sorted_agent_ids = beliefs.keys()
+	sorted_agent_ids.sort()
+	for agent_id in sorted_agent_ids:
 		var belief = beliefs[agent_id]
 		if belief.confidence > 0.3:
-			# Check if it's an enemy (different team)
-			# This is simplified - in real implementation would track teams
-			known_enemies.append(belief)
+			# Store agent_id with belief for target lookup
+			known_enemies.append({"agent_id": agent_id, "belief": belief})
 	
 	if known_enemies.size() > 0:
-		# Choose target
-		var target_belief = known_enemies[rng.randi() % known_enemies.size()]
+		# Choose target deterministically
+		var target_data = known_enemies[rng.randi() % known_enemies.size()]
+		var target_belief = target_data.belief
 		target_position = target_belief.position
 		current_state = State.ATTACKING
+		
+		# Find the actual agent reference for combat
+		current_target = null
+		for agent in all_agents:
+			if agent.agent_id == target_data.agent_id:
+				current_target = agent
+				break
 		
 		# Randomly decide to use smoke or flash
 		if rng.randf() < 0.05:  # 5% chance to use smoke
@@ -141,6 +161,7 @@ func make_decision(current_tick: int, rng: RandomNumberGenerator):
 			pending_flash = target_position
 			has_flash_pending = true
 	else:
+		current_target = null
 		# No enemies known, move randomly
 		if rng.randf() < 0.1:  # 10% chance to pick new random position
 			target_position = Vector2(rng.randf_range(0, 100), rng.randf_range(0, 100))
@@ -157,6 +178,11 @@ func apply_action(current_tick: int, delta: float):
 			var direction = (target_position - position).normalized()
 			velocity = direction * move_speed
 			position += velocity * delta
+			# Snap to 4 decimal places to prevent floating-point drift
+			position = Vector2(
+				snapped(position.x, 0.0001),
+				snapped(position.y, 0.0001)
+			)
 			position_changed.emit(position)
 
 func take_damage(amount: float, tick: int):
@@ -174,15 +200,31 @@ func is_alive() -> bool:
 func is_flashed() -> bool:
 	return is_flashed_until > 0
 
+func check_flash_expired(current_tick: int):
+	"""Decay flash effect over time"""
+	if is_flashed_until > 0 and current_tick >= is_flashed_until:
+		is_flashed_until = 0
+
+func update_smokes(current_tick: int):
+	"""Update smoke positions, removing expired smokes (in-place for performance)"""
+	# Remove expired smokes using reverse iteration
+	for i in range(smoke_data.size() - 1, -1, -1):
+		if smoke_data[i].expire_tick <= current_tick:
+			smoke_data.remove_at(i)
+	
+	# Rebuild smoke_positions array
+	smoke_positions.clear()
+	for s in smoke_data:
+		smoke_positions.append(s.position)
+
 func notify_flashed(current_tick: int, distance: float):
 	"""Notify that agent was flashed"""
 	var duration = int(10.0 * (1.0 - distance / 20.0))  # Closer = longer flash
 	is_flashed_until = max(is_flashed_until, current_tick + duration)
 
 func notify_smoke_deployed(pos: Vector2, current_tick: int):
-	"""Notify about smoke deployment (with comm delay)"""
-	smoke_positions.append(pos)
-	# In a more complex system, this would be delayed
+	"""Notify about smoke deployment with expiration"""
+	smoke_data.append({"position": pos, "expire_tick": current_tick + SMOKE_DURATION})
 
 func has_pending_smoke() -> bool:
 	return has_smoke_pending
@@ -199,13 +241,27 @@ func get_pending_flash_position() -> Vector2:
 	return pending_flash
 
 func get_current_target() -> Agent:
-	return current_target
+	if is_instance_valid(current_target):
+		return current_target
+	return null
+
+func can_fire(current_tick: int) -> bool:
+	"""Check if agent can fire based on fire rate"""
+	return current_tick - last_shot_tick >= FIRE_RATE_TICKS
+
+func record_shot(current_tick: int):
+	"""Record that a shot was fired"""
+	last_shot_tick = current_tick
 
 func get_damage() -> float:
 	return 25.0
 
 func get_state() -> Dictionary:
-	"""Get current state for serialization"""
+	"""Get current state for serialization (complete for replay)"""
+	var smoke_data_serialized = []
+	for s in smoke_data:
+		smoke_data_serialized.append({"x": s.position.x, "y": s.position.y, "expire_tick": s.expire_tick})
+	
 	return {
 		"id": agent_id,
 		"team": team,
@@ -213,14 +269,31 @@ func get_state() -> Dictionary:
 		"velocity": {"x": velocity.x, "y": velocity.y},
 		"health": health,
 		"state": current_state,
-		"is_flashed": is_flashed()
+		"is_flashed_until": is_flashed_until,
+		"smoke_data": smoke_data_serialized,
+		"beliefs": beliefs.duplicate(true),
+		"last_seen": last_seen.duplicate(),
+		"last_shot_tick": last_shot_tick
 	}
 
 func set_state(state: Dictionary):
-	"""Restore state from dictionary"""
+	"""Restore state from dictionary (complete for replay)"""
 	agent_id = state.id
 	team = state.team
 	position = Vector2(state.position.x, state.position.y)
 	velocity = Vector2(state.velocity.x, state.velocity.y)
 	health = state.health
 	current_state = state.state
+	is_flashed_until = state.get("is_flashed_until", 0)
+	last_shot_tick = state.get("last_shot_tick", INITIAL_SHOT_TICK)
+	
+	# Restore smoke data
+	smoke_data.clear()
+	smoke_positions.clear()
+	for s in state.get("smoke_data", []):
+		smoke_data.append({"position": Vector2(s.x, s.y), "expire_tick": s.expire_tick})
+		smoke_positions.append(Vector2(s.x, s.y))
+	
+	# Restore beliefs
+	beliefs = state.get("beliefs", {}).duplicate(true)
+	last_seen = state.get("last_seen", {}).duplicate()

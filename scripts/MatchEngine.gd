@@ -7,6 +7,7 @@ class_name MatchEngine
 signal tick_processed(tick_number: int)
 signal match_started()
 signal match_ended()
+signal round_ended(winner: String)
 
 const TICKS_PER_SECOND = 20
 const TICK_DELTA = 1.0 / TICKS_PER_SECOND
@@ -38,7 +39,7 @@ func start_match(seed: int, map: MapData, team_a: Array[Agent], team_b: Array[Ag
 	agents.append_array(team_b)
 	
 	for agent in agents:
-		agent.reset(rng.randi())
+		agent.reset()
 	
 	event_log.clear()
 	event_log.log_event({
@@ -66,13 +67,18 @@ func process_tick():
 	
 	current_tick += 1
 	
+	# Update smoke and flash decay for all agents
+	for agent in agents:
+		agent.update_smokes(current_tick)
+		agent.check_flash_expired(current_tick)
+	
 	# Update agent beliefs
 	for agent in agents:
 		agent.update_beliefs(current_tick, agents, map_data)
 	
-	# Process agent decisions
+	# Process agent decisions (pass all_agents for target lookup)
 	for agent in agents:
-		agent.make_decision(current_tick, rng)
+		agent.make_decision(current_tick, rng, agents)
 	
 	# Apply agent actions
 	for agent in agents:
@@ -83,6 +89,9 @@ func process_tick():
 	
 	# Check combat
 	_process_combat()
+	
+	# Check win condition
+	_check_win_condition()
 	
 	tick_processed.emit(current_tick)
 
@@ -131,11 +140,16 @@ func _process_combat():
 		if not attacker.is_alive():
 			continue
 		
+		# Check fire rate limiting
+		if not attacker.can_fire(current_tick):
+			continue
+		
 		var target = attacker.get_current_target()
 		if target and target.is_alive():
 			# Check line of sight
 			if _has_line_of_sight(attacker.position, target.position):
 				var hit_chance = _calculate_hit_chance(attacker, target)
+				attacker.record_shot(current_tick)  # Record shot regardless of hit
 				if rng.randf() < hit_chance:
 					target.take_damage(attacker.get_damage(), current_tick)
 					event_log.log_event({
@@ -152,6 +166,27 @@ func _process_combat():
 							"attacker_id": attacker.agent_id,
 							"target_id": target.agent_id
 						})
+
+func _check_win_condition():
+	"""Check if a team has won (elimination)"""
+	var team_a_alive = agents.filter(func(a): return a.team == Agent.Team.TEAM_A and a.is_alive())
+	var team_b_alive = agents.filter(func(a): return a.team == Agent.Team.TEAM_B and a.is_alive())
+	
+	if team_a_alive.is_empty() and team_b_alive.is_empty():
+		# Draw - both teams eliminated
+		event_log.log_event({"type": "round_end", "tick": current_tick, "winner": "draw"})
+		round_ended.emit("draw")
+		stop_match()
+	elif team_a_alive.is_empty():
+		# Team B wins
+		event_log.log_event({"type": "round_end", "tick": current_tick, "winner": "team_b"})
+		round_ended.emit("team_b")
+		stop_match()
+	elif team_b_alive.is_empty():
+		# Team A wins
+		event_log.log_event({"type": "round_end", "tick": current_tick, "winner": "team_a"})
+		round_ended.emit("team_a")
+		stop_match()
 
 func _has_line_of_sight(from: Vector2, to: Vector2) -> bool:
 	"""Check if there's line of sight between two points"""
