@@ -1,0 +1,142 @@
+[
+  {
+    "id": "agent.rifler.elite",
+    "displayName": "Elite Rifler",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.85,
+      "recoilControl": 0.8,
+      "reaction": 0.75,
+      "movement": 0.7,
+      "gameSense": 0.7,
+      "composure": 0.75,
+      "teamwork": 0.65,
+      "utility": 0.6,
+      "discipline": 0.7,
+      "aggression": 0.6
+    },
+    "loadoutWeaponIds": ["weapon.ak", "weapon.deagle"],
+    "loadoutUtilityIds": ["util.smoke.cs", "util.flash.cs", "util.he.cs", "util.molotov.cs"]
+  },
+  {
+    "id": "agent.awper.elite",
+    "displayName": "Elite AWPer",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.9,
+      "recoilControl": 0.6,
+      "reaction": 0.8,
+      "movement": 0.6,
+      "gameSense": 0.75,
+      "composure": 0.8,
+      "teamwork": 0.6,
+      "utility": 0.5,
+      "discipline": 0.75,
+      "aggression": 0.4
+    },
+    "loadoutWeaponIds": ["weapon.awp", "weapon.deagle"],
+    "loadoutUtilityIds": ["util.smoke.cs", "util.flash.cs"]
+  },
+  {
+    "id": "agent.entry.elite",
+    "displayName": "Elite Entry Fragger",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.8,
+      "recoilControl": 0.75,
+      "reaction": 0.85,
+      "movement": 0.85,
+      "gameSense": 0.65,
+      "composure": 0.7,
+      "teamwork": 0.7,
+      "utility": 0.55,
+      "discipline": 0.55,
+      "aggression": 0.85
+    },
+    "loadoutWeaponIds": ["weapon.ak", "weapon.deagle"],
+    "loadoutUtilityIds": ["util.flash.cs", "util.flash.cs", "util.smoke.cs"]
+  },
+  {
+    "id": "agent.support.elite",
+    "displayName": "Elite Support",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.7,
+      "recoilControl": 0.7,
+      "reaction": 0.65,
+      "movement": 0.65,
+      "gameSense": 0.85,
+      "composure": 0.8,
+      "teamwork": 0.9,
+      "utility": 0.9,
+      "discipline": 0.85,
+      "aggression": 0.35
+    },
+    "loadoutWeaponIds": ["weapon.m4"],
+    "loadoutUtilityIds": ["util.smoke.cs", "util.smoke.cs", "util.flash.cs", "util.molotov.cs"]
+  },
+  {
+    "id": "agent.igl.elite",
+    "displayName": "Elite IGL",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.7,
+      "recoilControl": 0.7,
+      "reaction": 0.7,
+      "movement": 0.65,
+      "gameSense": 0.95,
+      "composure": 0.9,
+      "teamwork": 0.95,
+      "utility": 0.85,
+      "discipline": 0.9,
+      "aggression": 0.4
+    },
+    "loadoutWeaponIds": ["weapon.m4", "weapon.deagle"],
+    "loadoutUtilityIds": ["util.smoke.cs", "util.flash.cs", "util.he.cs"]
+  },
+  {
+    "id": "agent.rifler.average",
+    "displayName": "Average Rifler",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.55,
+      "recoilControl": 0.5,
+      "reaction": 0.5,
+      "movement": 0.5,
+      "gameSense": 0.5,
+      "composure": 0.5,
+      "teamwork": 0.5,
+      "utility": 0.45,
+      "discipline": 0.5,
+      "aggression": 0.5
+    },
+    "loadoutWeaponIds": ["weapon.ak"],
+    "loadoutUtilityIds": ["util.smoke.cs", "util.flash.cs"]
+  },
+  {
+    "id": "agent.rookie",
+    "displayName": "Rookie",
+    "baseHp": 100,
+    "baseArmor": 0,
+    "traits": {
+      "aim": 0.3,
+      "recoilControl": 0.25,
+      "reaction": 0.35,
+      "movement": 0.4,
+      "gameSense": 0.3,
+      "composure": 0.25,
+      "teamwork": 0.35,
+      "utility": 0.25,
+      "discipline": 0.3,
+      "aggression": 0.6
+    },
+    "loadoutWeaponIds": ["weapon.smg"],
+    "loadoutUtilityIds": ["util.flash.cs"]
+  }
+]

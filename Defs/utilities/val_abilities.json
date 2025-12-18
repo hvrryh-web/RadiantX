@@ -1,0 +1,288 @@
+[
+  {
+    "id": "abil.controller.smoke",
+    "family": "VAL_Ability",
+    "castType": "PlaceMarker",
+    "equipTime": 0.35,
+    "castTime": 0.15,
+    "maxCharges": 3,
+    "cooldown": 0,
+    "creditCost": 100,
+    "effects": [
+      {
+        "kind": "Smoke",
+        "duration": 15.0,
+        "radius": 4.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.1,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.controller.incendiary",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.35,
+    "castTime": 0.10,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 250,
+    "projectile": {
+      "speed": 22.0,
+      "gravity": 9.81,
+      "maxLife": 2.0,
+      "bounces": false,
+      "bounceDamp": 0
+    },
+    "effects": [
+      {
+        "kind": "Burn",
+        "duration": 7.0,
+        "radius": 3.5,
+        "dpsOrValue": 18.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.initiator.flash",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 250,
+    "projectile": {
+      "speed": 25.0,
+      "gravity": 0,
+      "maxLife": 1.5,
+      "bounces": false,
+      "bounceDamp": 0
+    },
+    "effects": [
+      {
+        "kind": "FlashBlind",
+        "duration": 2.0,
+        "radius": 15.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.2,
+        "requiresLOS": true,
+        "requiresFacing": true,
+        "facingAngleDeg": 140
+      }
+    ]
+  },
+  {
+    "id": "abil.initiator.concuss",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.25,
+    "castTime": 0.08,
+    "maxCharges": 1,
+    "cooldown": 35,
+    "creditCost": 0,
+    "projectile": {
+      "speed": 28.0,
+      "gravity": 0,
+      "maxLife": 1.2,
+      "bounces": true,
+      "bounceDamp": 0.6
+    },
+    "effects": [
+      {
+        "kind": "Concuss",
+        "duration": 3.5,
+        "radius": 8.0,
+        "dpsOrValue": 0.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.initiator.reveal",
+    "family": "VAL_Ability",
+    "castType": "FireProjectile",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 300,
+    "projectile": {
+      "speed": 20.0,
+      "gravity": 0,
+      "maxLife": 3.0,
+      "bounces": false,
+      "bounceDamp": 0
+    },
+    "effects": [
+      {
+        "kind": "Reveal",
+        "duration": 3.0,
+        "radius": 12.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": true,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.duelist.satchel",
+    "family": "VAL_Ability",
+    "castType": "ThrowArc",
+    "equipTime": 0.25,
+    "castTime": 0.1,
+    "maxCharges": 2,
+    "cooldown": 0,
+    "creditCost": 200,
+    "throw": {
+      "speed": 15.0,
+      "gravity": 9.81,
+      "fuseTime": 0,
+      "detonateOnRest": false
+    },
+    "effects": [
+      {
+        "kind": "Knockback",
+        "duration": 0.1,
+        "radius": 5.0,
+        "dpsOrValue": 50.0,
+        "falloff": 0.5,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.sentinel.trap",
+    "family": "VAL_Ability",
+    "castType": "PlaceMarker",
+    "equipTime": 0.4,
+    "castTime": 0.2,
+    "maxCharges": 2,
+    "cooldown": 40,
+    "creditCost": 200,
+    "effects": [
+      {
+        "kind": "Trap",
+        "duration": 0,
+        "radius": 3.0,
+        "dpsOrValue": 0.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      },
+      {
+        "kind": "Slow",
+        "duration": 4.0,
+        "radius": 6.0,
+        "dpsOrValue": 0.5,
+        "falloff": 0.2,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.sentinel.wall",
+    "family": "VAL_Ability",
+    "castType": "PlaceMarker",
+    "equipTime": 0.5,
+    "castTime": 0.3,
+    "maxCharges": 1,
+    "cooldown": 45,
+    "creditCost": 400,
+    "effects": [
+      {
+        "kind": "Wall",
+        "duration": 30.0,
+        "radius": 0.5,
+        "dpsOrValue": 800.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.support.heal",
+    "family": "VAL_Ability",
+    "castType": "Beam",
+    "equipTime": 0.3,
+    "castTime": 0.1,
+    "maxCharges": 1,
+    "cooldown": 45,
+    "creditCost": 0,
+    "effects": [
+      {
+        "kind": "Heal",
+        "duration": 5.0,
+        "radius": 1.0,
+        "dpsOrValue": 12.0,
+        "falloff": 0.0,
+        "requiresLOS": true,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.support.shield",
+    "family": "VAL_Ability",
+    "castType": "Self",
+    "equipTime": 0.2,
+    "castTime": 0.05,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 400,
+    "effects": [
+      {
+        "kind": "Shield",
+        "duration": 0,
+        "radius": 0,
+        "dpsOrValue": 50.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  },
+  {
+    "id": "abil.duelist.suppress",
+    "family": "VAL_Ability",
+    "castType": "InstantAOE",
+    "equipTime": 0.4,
+    "castTime": 0.2,
+    "maxCharges": 1,
+    "cooldown": 0,
+    "creditCost": 7,
+    "effects": [
+      {
+        "kind": "Suppress",
+        "duration": 4.0,
+        "radius": 20.0,
+        "dpsOrValue": 1.0,
+        "falloff": 0.0,
+        "requiresLOS": false,
+        "requiresFacing": false,
+        "facingAngleDeg": 0
+      }
+    ]
+  }
+]
